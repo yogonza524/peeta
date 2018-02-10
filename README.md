@@ -12,37 +12,31 @@ Peeta need next dependencies for work:
 ```xml
     <dependencies>
         <dependency>
-            <groupId>com.mercadopago</groupId>
-            <artifactId>sdk</artifactId>
-            <version>0.3.4</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.8.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.jettison</groupId>
-            <artifactId>jettison</artifactId>
-            <version>1.3.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.18</version>
-            <type>jar</type>
+            <groupId>io.github.yogonza524</groupId>
+            <artifactId>peeta</artifactId>
+            <version>1.0.1</version>
         </dependency>
     </dependencies>
 ```
-For mercadopago SDK artifact you need specify the repository like this
+And then just add the repository (this artifact is alowed at Sonatype)
 ```xml
       <repositories>
         <repository>
-            <id>mercadopago</id>
-            <url>https://github.com/mercadopago/sdk-java/raw/master/releases</url>
+            <id>oss-sonatype</id>
+            <name>oss-sonatype</name>
+            <url>https://oss.sonatype.org/content/repositories/releases/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
       </repositories>
 ```
+# Configure credentials
+Just find your MercadoPago credentials at https://www.mercadopago.com.ar/developers/es/api-docs/basics/authentication and then
+```java
+Peeta p = Peeta.builder("YOUR_CLIENT_ID","YOUR_CLIENT_SECRET").build();
+```
+
 # A simple user story:
 >"As a developer I want to make a very simple test of Peeta's use to see its basic operation"
 
