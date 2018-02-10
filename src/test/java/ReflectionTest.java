@@ -19,7 +19,7 @@ import mercadopago.peeta.model.users.balance.Balance;
 import mercadopago.peeta.util.Action;
 import mercadopago.peeta.util.Attribute;
 import mercadopago.peeta.util.Topic;
-import mercadopago.peetaa.Peeta;
+import mercadopago.core.Peeta;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

@@ -32,7 +32,7 @@ import mercadopago.peeta.requests.PaymentRequest;
 import mercadopago.peeta.requests.SettlementRequest;
 import mercadopago.peeta.requests.UserRequest;
 import mercadopago.peeta.settlement_report.SettlementReport;
-import mercadopago.peetaa.Peeta;
+import mercadopago.core.Peeta;
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.After;
 import org.junit.AfterClass;
