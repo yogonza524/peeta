@@ -342,3 +342,113 @@ And the response will be:
   "date_created": "2018-02-10T12:54:34.959-04:00"
 }
 ```
+
+> "As a developer I want to know the cost of a package assessed by OCA given the dimensions and weight of it"
+
+Fact. MercadoPago has an agreement with OCA (one of the many Argentine Postal Services), through Peeta we can obtain such information quickly and easily. Let's checkout this.
+
+```java
+     @Test
+     public void shippingEntityTest() {
+        Peeta p = Peeta.builder(clientId, secret).build();
+        Gson g = new GsonBuilder().setPrettyPrinting().create();
+        
+        Optional<ShippingCalculatorRequest> sh = p.shipping(
+            ShippingPackage
+                .builder()
+                .height(20) //centimeters
+                .width(13)  //centimeters
+                .weight(10) //grams
+                .large(22)  //centimeters
+                .zip_code("3400") //Corrientes Capital ZIP Code (Argentine)
+                .free_method(
+                    FreeMethods.OCA_PRIORITY.value() 
+                )
+                .build()
+        );
+         
+        if (sh.isPresent()) {
+            ShippingCalculatorRequest shipping = sh.get();
+            System.out.println(
+                shipping.success() ? 
+                    shipping.ok().toStringPretty() :
+                    shipping.error().toStringPretty()
+            );
+         }
+     }
+```
+
+And the response will be
+```json
+{
+  "custom_message": {
+    "reason": ""
+  },
+  "options": [
+    {
+      "tags": [],
+      "id": "415369122",
+      "estimated_delivery_time": {
+        "unit": "hour",
+        "shipping": 48.0,
+        "time_frame": {},
+        "offset": {
+          "shipping": 48.0
+        },
+        "type": "unknown_frame"
+      },
+      "list_cost": 139.99,
+      "currency_id": "ARS",
+      "shipping_option_type": "address",
+      "shipping_method_type": "standard",
+      "name": "Normal a domicilio",
+      "display": "recommended",
+      "cost": 139.99,
+      "discount": {
+        "promoted_amount": 0.0,
+        "rate": 0.0,
+        "type": "none"
+      },
+      "shipping_method_id": 73328
+    }
+  ],
+  "destination": {
+    "zip_code": "3400",
+    "state": {
+      "id": "AR-W",
+      "name": "Corrientes"
+    },
+    "country": {
+      "id": "AR",
+      "name": "Argentina"
+    },
+    "city": {}
+  }
+}
+```
+
+> "As a developer I want to know the different issuers associated with a type of card, for example Mastercard"
+
+Fact. Remember that in order to know the issuers previously, you must know the name of the credit institution (Visa, Mastercard, etc.) provided by the example "Get payment methods". Let's see:
+
+```java
+     @Test
+     public void emisoresEntityTest() {
+         Peeta p = Peeta.builder(clientId, secret).build();
+         Gson g = new GsonBuilder().setPrettyPrinting().create();
+        
+         Optional<CardIssuerRequest> req = p.cardissuer("master");
+         
+         if (req.isPresent()) {
+             CardIssuerRequest issuers = req.get();
+             if (issuer.success()) {
+                issuers.ok().stream().forEach(i -> {
+                    System.out.println(g.toJson(i));
+                });
+             }
+             else {
+                 System.out.println(g.toJson(issuers.error()));
+             }
+         }
+     }
+```
