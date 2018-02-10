@@ -149,3 +149,196 @@ In response we see the following
 URL of new checkout: https://sandbox.mercadopago.com/mla/checkout/pay?pref_id=139929232-0d4f364e-86c3-4215-9ddc-b9441fe3506b
 ```
 ![Checkout preference created](https://i.imgur.com/P6NZgTy.png)
+
+> "As a developer I want to obtain the payment preference created in the previous example"
+
+Fact. We just have to ask Peeta to look for it from the preference_id
+
+```java
+     @Test
+     public void getCheckoutTest() {
+         Peeta p = Peeta.builder(clientId, secret).build();
+         Gson g = new GsonBuilder().setPrettyPrinting().create();
+         
+         Optional<CheckoutRequest> preference = p.sandbox(true).getCheckout("139929232-0d4f364e-86c3-4215-9ddc-b9441fe3506b");
+         
+         if (preference.isPresent()) {
+            CheckoutRequest request = preference.get();
+            
+            if (request.success()) {
+                System.out.println(g.toJson(request.ok()));
+            }
+            else {
+                System.out.println(g.toJson(request.error()));
+            }
+         }
+     }
+```
+And the response will be:
+```xml
+{
+  "collector_id": 139929232,
+  "operation_type": "regular_payment",
+  "items": [
+    {
+      "id": "",
+      "title": "Toyota Corolla 2019",
+      "description": "",
+      "picture_url": "http://www.toyota.com.ar/showroom/corolla/images/gallery/02-03.jpg",
+      "category_id": "",
+      "quantity": 1,
+      "currency_id": "ARS",
+      "unit_price": 220584.0
+    }
+  ],
+  "payer": {
+    "name": "",
+    "surname": "",
+    "email": "",
+    "phone": {
+      "area_code": "",
+      "number": ""
+    },
+    "identification": {
+      "type": "",
+      "number": ""
+    },
+    "address": {
+      "zip_code": "",
+      "street_name": ""
+    },
+    "date_created": ""
+  },
+  "back_urls": {
+    "success": "",
+    "pending": "",
+    "failure": ""
+  },
+  "auto_return": "",
+  "external_reference": "",
+  "expires": false,
+  "payment_methods": {
+    "excluded_payment_methods": [
+      {
+        "id": ""
+      }
+    ],
+    "excluded_payment_types": [
+      {
+        "id": ""
+      }
+    ],
+    "installments": 0
+  },
+  "client_id": 963,
+  "marketplace": "NONE",
+  "marketplace_fee": 0,
+  "additional_info": "",
+  "id": "139929232-0d4f364e-86c3-4215-9ddc-b9441fe3506b",
+  "init_point": "https://www.mercadopago.com/mla/checkout/start?pref_id\u003d139929232-0d4f364e-86c3-4215-9ddc-b9441fe3506b",
+  "sandbox_init_point": "https://sandbox.mercadopago.com/mla/checkout/pay?pref_id\u003d139929232-0d4f364e-86c3-4215-9ddc-b9441fe3506b",
+  "date_created": "2018-02-10T12:54:34.959-04:00"
+}
+```
+
+> "As a developer I want to update an item of the payment preference that I created in the first example."
+
+Fact. Remember that according to MercadoPago all the items are stateless with which you must be careful as the actual process deletes any previous item, Peeta continues with the stateless scheme of MercadoPago. Let's see
+
+```java
+     @Test
+     public void updateCheckoutModelTest() throws Exception {
+         Peeta p = Peeta.builder(clientId, secret).build();
+         Gson g = new GsonBuilder().setPrettyPrinting().create();
+         
+         CheckoutModel data = CheckoutModel.builder()
+                 .id("139929232-0d4f364e-86c3-4215-9ddc-b9441fe3506b")
+                 .items(Arrays.asList(CheckoutItem.builder()
+                            .id("18")
+                            .title("Toyota Avalon 2018")
+                            .picture_url("https://photos7.motorcar.com/new-2018-toyota-avalon-xlepremium-11144-16516945-2-1024.jpg")
+                            .quantity(1)
+                            .unit_price(234567.67)
+                            .build()
+                 )).build();
+         
+         Optional<CheckoutRequest> request = p.updateCheckout(data);
+         
+         if (request.isPresent()) {
+             CheckoutRequest r = request.get();
+             if (r.success()) {
+                 System.out.println(r.ok().toStringPretty());
+             }
+             else {
+                 System.out.println(r.withError().toStringPretty());
+             }
+         }
+     }
+```
+And the response will be:
+
+```json
+{
+  "collector_id": 139929232,
+  "operation_type": "regular_payment",
+  "items": [
+    {
+      "id": "18",
+      "title": "Toyota Avalon 2018",
+      "description": "",
+      "picture_url": "https://photos7.motorcar.com/new-2018-toyota-avalon-xlepremium-11144-16516945-2-1024.jpg",
+      "category_id": "",
+      "quantity": 1,
+      "currency_id": "ARS",
+      "unit_price": 234567.67
+    }
+  ],
+  "payer": {
+    "name": "",
+    "surname": "",
+    "email": "",
+    "phone": {
+      "area_code": "",
+      "number": ""
+    },
+    "identification": {
+      "type": "",
+      "number": ""
+    },
+    "address": {
+      "zip_code": "",
+      "street_name": ""
+    },
+    "date_created": ""
+  },
+  "back_urls": {
+    "success": "",
+    "pending": "",
+    "failure": ""
+  },
+  "auto_return": "",
+  "external_reference": "",
+  "expires": false,
+  "payment_methods": {
+    "excluded_payment_methods": [
+      {
+        "id": ""
+      }
+    ],
+    "excluded_payment_types": [
+      {
+        "id": ""
+      }
+    ],
+    "installments": 0
+  },
+  "client_id": 963,
+  "marketplace": "NONE",
+  "marketplace_fee": 0,
+  "additional_info": "",
+  "id": "139929232-0d4f364e-86c3-4215-9ddc-b9441fe3506b",
+  "init_point": "https://www.mercadopago.com/mla/checkout/start?pref_id\u003d139929232-0d4f364e-86c3-4215-9ddc-b9441fe3506b",
+  "sandbox_init_point": "https://sandbox.mercadopago.com/mla/checkout/pay?pref_id\u003d139929232-0d4f364e-86c3-4215-9ddc-b9441fe3506b",
+  "date_created": "2018-02-10T12:54:34.959-04:00"
+}
+```
