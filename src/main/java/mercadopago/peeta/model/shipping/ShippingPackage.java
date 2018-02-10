@@ -53,7 +53,7 @@ public class ShippingPackage {
     public Map<String,Object> map() {
         Map<String,Object> map = new HashMap<>();
         map.put("dimensions",height + "x" + width + "x" + large + "," + weight);
-        System.out.println(map.get("dimensions"));
+        
         map.put("zip_code", zip_code);
         if (item_price != null && item_price > 0) {
             map.put("item_price", item_price);

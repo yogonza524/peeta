@@ -6,31 +6,21 @@
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import java.io.StringReader;
-import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import mercadopago.peeta.enums.FreeMethods;
 import mercadopago.peeta.error.BodyError;
-import mercadopago.peeta.error.RequestError;
 import mercadopago.peeta.util.CheckoutBaseRequest;
 import mercadopago.peeta.model.checkout.CheckoutItem;
 import mercadopago.peeta.model.checkout.CheckoutModel;
-import mercadopago.peeta.model.identification_types.IdentificationType;
 import mercadopago.peeta.model.payment.Payment;
 import mercadopago.peeta.requests.ShippingCalculatorRequest;
 import mercadopago.peeta.model.shipping.ShippingCalculatorBody;
 import mercadopago.peeta.model.shipping.ShippingPackage;
-import mercadopago.peeta.model.paymethods.PayMethod;
 import mercadopago.peeta.model.users.User;
 import mercadopago.peeta.requests.BalanceRequest;
 import mercadopago.peeta.requests.CardIssuerRequest;
@@ -85,7 +75,7 @@ public class PeetaTest {
     }
 
     @Test
-//    @Ignore
+    @Ignore
     public void buildTest() {
         Peeta peeta = Peeta.builder(clientId, secret).build();
         Optional<PayMethodRequest> request = peeta.payMethods();
@@ -108,7 +98,7 @@ public class PeetaTest {
                         .title("Toyota Corolla 2019")
                         .picture_url("http://www.toyota.com.ar/showroom/corolla/images/gallery/02-03.jpg")
                         .quantity(1)
-                        .unit_price(22.5)
+                        .unit_price(220584.0)
                         .build()
                 ))
             .build();
@@ -130,13 +120,16 @@ public class PeetaTest {
      @Test
      @Ignore
      public void getCheckoutTest() {
-         Optional<CheckoutRequest> pay = p.sandbox(true).getCheckout("139929232-4794f3ac-5895-4740-bee6-13fa41678b1c");
+         Optional<CheckoutRequest> pay = p.sandbox(true).getCheckout("139929232-0d4f364e-86c3-4215-9ddc-b9441fe3506b");
          
          if (pay.isPresent()) {
             CheckoutRequest request = pay.get();
             
             if (request.success()) {
-                
+                System.out.println(g.toJson(request.ok()));
+            }
+            else {
+                System.out.println(g.toJson(request.error()));
             }
          }
      }
@@ -159,12 +152,13 @@ public class PeetaTest {
      @Ignore
      public void updateCheckoutModelTest() throws Exception {
          CheckoutModel data = CheckoutModel.builder()
-                 .id("139929232-532d8744-f865-4282-ad14-832c45bb9d39")
+                 .id("139929232-0d4f364e-86c3-4215-9ddc-b9441fe3506b")
                  .items(Arrays.asList(CheckoutItem.builder()
                             .id("18")
-                            .title("Esperado")
-                            .quantity(3)
-                            .unit_price(23.5)
+                            .title("Toyota Avalon 2018")
+                            .picture_url("https://photos7.motorcar.com/new-2018-toyota-avalon-xlepremium-11144-16516945-2-1024.jpg")
+                            .quantity(1)
+                            .unit_price(234567.67)
                             .build()
                  )).build();
          
@@ -187,7 +181,7 @@ public class PeetaTest {
          Map<String,Object> param = new HashMap<>();
          param.put("dimensions", "30x31x31,258");
          param.put("zip_code", "5700");
-//         param.put("item_price","100.58");
+         
          JSONObject res = p.mercadoPago().get("/shipping_options", param);
          
         JsonParser parser = new JsonParser();
@@ -212,10 +206,10 @@ public class PeetaTest {
         Optional<ShippingCalculatorRequest> sh = p.shipping(
             ShippingPackage
                 .builder()
-                .height(20)
-                .width(13)
-                .weight(10)
-                .large(22)
+                .height(20) //centimeters
+                .width(13)  //centimeters
+                .weight(10) //grams
+                .large(22)  //centimeters
                 .zip_code("3400")
                 .free_method(
                     FreeMethods.OCA_PRIORITY.value()
@@ -292,6 +286,9 @@ public class PeetaTest {
                     System.out.println(g.toJson(i));
                 });
              }
+             else {
+                 System.out.println(g.toJson(issuer.error()));
+             }
          }
      }
      
@@ -312,7 +309,7 @@ public class PeetaTest {
          if (types.isPresent()) {
              if (types.get().success()) {
                 types.get().ok().stream().forEach(c -> {
-                    System.out.println(c.getName());
+                    System.out.println(g.toJson(c));
                 });
              }
              else {
@@ -482,7 +479,7 @@ public class PeetaTest {
      }
      
      @Test
-     @Ignore
+//     @Ignore
      public void getInstallmentsTest() {
          String id = "visa";
          

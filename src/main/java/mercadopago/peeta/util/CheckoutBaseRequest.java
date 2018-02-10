@@ -24,7 +24,7 @@ public abstract class CheckoutBaseRequest {
         return this.getStatus() == 200 || this.getStatus() == 201;
     }
     
-    public boolean error() throws IllegalAccessException {
+    public boolean error() {
         return this.getStatus() >= 400;
     }
     

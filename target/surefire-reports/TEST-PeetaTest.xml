@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="27" failures="0" name="PeetaTest" time="4.185" errors="0" skipped="26">
+<testsuite tests="27" failures="0" name="PeetaTest" time="4.445" errors="0" skipped="26">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_161\jre\bin"/>
@@ -65,80 +65,80 @@
   <testcase classname="PeetaTest" name="updateCheckoutModelTest" time="0">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="emisoresTest" time="0.006">
+  <testcase classname="PeetaTest" name="emisoresTest" time="0.005">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="createPaymentByEntityTest" time="0.006">
+  <testcase classname="PeetaTest" name="createPaymentByEntityTest" time="0.005">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="dniEntityTest" time="0.006">
+  <testcase classname="PeetaTest" name="dniEntityTest" time="0.005">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="buildTest" time="4.005"/>
-  <testcase classname="PeetaTest" name="getCheckoutTest" time="4.005">
+  <testcase classname="PeetaTest" name="buildTest" time="0.005">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="getInstallmentsTest" time="4.006">
+  <testcase classname="PeetaTest" name="getCheckoutTest" time="0.005">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="payEntityTest" time="4.006">
+  <testcase classname="PeetaTest" name="getInstallmentsTest" time="4.277"/>
+  <testcase classname="PeetaTest" name="payEntityTest" time="4.277">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="accessTokenTest" time="4.006">
+  <testcase classname="PeetaTest" name="accessTokenTest" time="4.277">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="createCheckoutTest" time="4.007">
+  <testcase classname="PeetaTest" name="createCheckoutTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="createPaymentTest" time="4.007">
+  <testcase classname="PeetaTest" name="createPaymentTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="shippingEntityTest" time="4.007">
+  <testcase classname="PeetaTest" name="shippingEntityTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="balanceTest" time="4.007">
+  <testcase classname="PeetaTest" name="balanceTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="shippingTest" time="4.007">
+  <testcase classname="PeetaTest" name="shippingTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="userEntityMeTest" time="4.007">
+  <testcase classname="PeetaTest" name="userEntityMeTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="emisoresEntityTest" time="4.008">
+  <testcase classname="PeetaTest" name="emisoresEntityTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="findUserTest" time="4.008">
+  <testcase classname="PeetaTest" name="findUserTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="payMethodsTest" time="4.008">
+  <testcase classname="PeetaTest" name="payMethodsTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="showAllUsersTest" time="4.008">
+  <testcase classname="PeetaTest" name="showAllUsersTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="updateCheckoutTest" time="4.008">
+  <testcase classname="PeetaTest" name="updateCheckoutTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="customerTest" time="4.008">
+  <testcase classname="PeetaTest" name="customerTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="getPaymentsTest" time="4.008">
+  <testcase classname="PeetaTest" name="getPaymentsTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="userMeTest" time="4.008">
+  <testcase classname="PeetaTest" name="userMeTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="preaprobalTest" time="4.009">
+  <testcase classname="PeetaTest" name="preaprobalTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="settlementReportTest" time="4.009">
+  <testcase classname="PeetaTest" name="settlementReportTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="dniTest" time="4.014">
+  <testcase classname="PeetaTest" name="dniTest" time="4.278">
     <skipped/>
   </testcase>
-  <testcase classname="PeetaTest" name="listAllPaymentsTest" time="4.015">
+  <testcase classname="PeetaTest" name="listAllPaymentsTest" time="4.278">
     <skipped/>
   </testcase>
 </testsuite>
