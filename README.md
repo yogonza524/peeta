@@ -452,3 +452,227 @@ Fact. Remember that in order to know the issuers previously, you must know the n
          }
      }
 ```
+
+And the response will be:
+```json
+{
+  "id": "1078",
+  "name": "Mercado Pago + Banco Patagonia",
+  "secure_thumbnail": "https://www.mercadopago.com/org-img/MP3/API/logos/1078.gif",
+  "thumbnail": "http://img.mlstatic.com/org-img/MP3/API/logos/1078.gif",
+  "processing_mode": "aggregator"
+}
+{
+  "id": "1007",
+  "name": "Nativa Mastercard",
+  "secure_thumbnail": "https://www.mercadopago.com/org-img/MP3/API/logos/1007.gif",
+  "thumbnail": "http://img.mlstatic.com/org-img/MP3/API/logos/1007.gif",
+  "processing_mode": "aggregator"
+}
+{
+  "id": "692",
+  "name": "Cencosud",
+  "secure_thumbnail": "https://www.mercadopago.com/org-img/MP3/API/logos/692.gif",
+  "thumbnail": "http://img.mlstatic.com/org-img/MP3/API/logos/692.gif",
+  "processing_mode": "aggregator"
+}
+{
+  "id": "331",
+  "name": "Nuevo Banco de Entre Rios",
+  "secure_thumbnail": "https://www.mercadopago.com/org-img/MP3/API/logos/331.gif",
+  "thumbnail": "http://img.mlstatic.com/org-img/MP3/API/logos/331.gif",
+  "processing_mode": "aggregator"
+}
+{
+  "id": "287",
+  "name": "Banco Santa Cruz",
+  "secure_thumbnail": "https://www.mercadopago.com/org-img/MP3/API/logos/287.gif",
+  "thumbnail": "http://img.mlstatic.com/org-img/MP3/API/logos/287.gif",
+  "processing_mode": "aggregator"
+}
+```
+
+> "As a developer I want to know what are the types of personal identification that MercadoPago manages"
+
+Fact. Peeta provides a very simple way to check this MercadoPago. Let's see
+
+```java
+     @Test
+     public void dniEntityTest() {
+         Peeta p = Peeta.builder(clientId, secret).build();
+         Gson g = new GsonBuilder().setPrettyPrinting().create();
+     
+         Optional<IdentificationTypeRequest> types = p.identificationTypes();
+         
+         if (types.isPresent()) {
+             if (types.get().success()) {
+                types.get().ok().stream().forEach(c -> {
+                    System.out.println(g.toJson(c));
+                });
+             }
+             else {
+                 System.out.println("Error: " + types.get().error().getMessage());
+             }
+         }
+     }
+```
+
+And the response will be:
+
+```json
+{
+  "id": "DNI",
+  "name": "DNI",
+  "type": "number",
+  "min_length": 7,
+  "max_length": 8
+}
+{
+  "id": "CI",
+  "name": "Cédula",
+  "type": "number",
+  "min_length": 1,
+  "max_length": 9
+}
+{
+  "id": "LC",
+  "name": "L.C.",
+  "type": "number",
+  "min_length": 6,
+  "max_length": 7
+}
+{
+  "id": "LE",
+  "name": "L.E.",
+  "type": "number",
+  "min_length": 6,
+  "max_length": 7
+}
+{
+  "id": "Otro",
+  "name": "Otro",
+  "type": "number",
+  "min_length": 5,
+  "max_length": 20
+}
+```
+
+> "As a developer I want to know the personal data of the account associated to MercadoPago used by Peeta"
+
+Fact. Peeta provides the facility to obtain the data associated with the account in a very simple way. Let's see
+
+```java
+     @Test
+     public void userEntityMeTest() {
+         Peeta p = Peeta.builder(clientId, secret).build();
+         Gson g = new GsonBuilder().setPrettyPrinting().create();
+     
+         Optional<UserRequest> request = p.me();
+         if (request.isPresent()) {
+             if (request.get().success()) {
+                 User u = request.get().ok();
+                 System.out.println(g.toJson(u));
+             }
+             else {
+                 BodyError e = request.get().error();
+                 System.out.println(g.toJson(e));
+             }
+         }
+     }
+```
+
+And the response will be
+
+```json
+{
+  "id": 139929232,
+  "nickname": "MENDOZAGONZALO75",
+  "registration_date": "2013-06-07T22:10:43.000-04:00",
+  "first_name": "Gonzalo",
+  "last_name": "Mendoza",
+  "country_id": "AR",
+  "email": "yogonza524@gmail.com",
+  "identification": {
+    "number": "34093153",
+    "type": "DNI"
+  },
+  "address": {
+    "address": "Feliz de Azara 660",
+    "city": "Capital",
+    "state": "AR-W",
+    "zip_code": "3400"
+  },
+  "phone": {
+    "area_code": " ",
+    "extension": "",
+    "number": "3794267413",
+    "verified": false
+  },
+  "alternative_phone": {
+    "area_code": "",
+    "extension": "",
+    "number": ""
+  },
+  "user_type": "normal",
+  "tags": [
+    "normal",
+    "user_info_verified",
+    "messages_as_seller",
+    "messages_as_buyer"
+  ],
+  "points": 1,
+  "site_id": "MLA",
+  "permalink": "http://perfil.mercadolibre.com.ar/MENDOZAGONZALO75",
+  "shipping_modes": [
+    "custom",
+    "not_specified",
+    "me2"
+  ],
+  "seller_experience": "INTERMEDIATE",
+  "buyer_reputation": {
+    "canceled_transactions": 0,
+    "tags": []
+  },
+  "status": {
+    "billing": {
+      "allow": true,
+      "codes": []
+    },
+    "buy": {
+      "allow": true,
+      "codes": [],
+      "immediate_payment": {
+        "reasons": [],
+        "required": false
+      }
+    },
+    "confirmed_email": true,
+    "shopping_cart": {},
+    "immediate_payment": false,
+    "list": {
+      "allow": true,
+      "codes": [],
+      "immediate_payment": {
+        "reasons": [],
+        "required": false
+      }
+    },
+    "mercadoenvios": "not_accepted",
+    "mercadopago_account_type": "personal",
+    "mercadopago_tc_accepted": true,
+    "required_action": "",
+    "sell": {
+      "allow": true,
+      "codes": [],
+      "immediate_payment": {
+        "reasons": [],
+        "required": false
+      }
+    },
+    "site_status": "active",
+    "user_type": "simple_registration"
+  },
+  "secure_email": "gmendoz.5g013s@mail.mercadolibre.com",
+  "context": {}
+}
+```
