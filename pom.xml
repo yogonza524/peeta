@@ -20,6 +20,18 @@
             <timezone>GMT-3</timezone>
         </developer>
     </developers>
+    <licenses>
+        <license>
+          <name>The Apache License, Version 2.0</name>
+          <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:git://github.com/yogonza524/peeta.git</connection>
+        <developerConnection>scm:git:ssh://github.com/yogonza524/peeta.git</developerConnection>
+        <url>https://github.com/yogonza524/peeta/tree/master/</url>
+    </scm>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
