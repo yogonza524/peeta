@@ -43,7 +43,7 @@ For mercadopago SDK artifact you need specify the repository like this
         </repository>
       </repositories>
 ```
-# A simple user stoyry:
+# A simple user story:
 >"As a developer I want to make a very simple test of Peeta's use to see its basic operation"
 
 Fact. Please look at the following basic example. This test list all pay methods availables at MercadoPago
@@ -675,4 +675,101 @@ And the response will be
   "secure_email": "gmendoz.5g013s@mail.mercadolibre.com",
   "context": {}
 }
+```
+
+> "As a developer I want to know the data of the fees of some card, for example Visa"
+
+Fact. Remember that you must previously know the name of the card. Let's see
+
+```java
+     @Test
+     public void getInstallmentsTest() {
+         Peeta p = Peeta.builder(clientId, secret).build();
+         Gson g = new GsonBuilder().setPrettyPrinting().create();
+     
+         String id = "visa";
+         
+         Optional<InstallmentsRequest> req = p.getInstallmentById(id);
+         
+         if (req.isPresent()) {
+             InstallmentsRequest i = req.get();
+             if (i.success()) {
+                 System.out.println(g.toJson(i.ok()));
+             }
+             else {
+                 System.out.println(g.toJson(i.error()));
+             }
+         }
+     }
+```
+
+And the response will be:
+
+```json
+[
+  {
+    "payment_method_id": "visa",
+    "payment_type_id": "credit_card",
+    "issuer": {
+      "id": "288",
+      "name": "Tarjeta Shopping",
+      "secure_thumbnail": "https://www.mercadopago.com/org-img/MP3/API/logos/288.gif",
+      "thumbnail": "http://img.mlstatic.com/org-img/MP3/API/logos/288.gif"
+    },
+    "payer_costs": [
+      {
+        "installments": 1,
+        "installment_rate": 0.0,
+        "labels": [
+          "CFT_0,00%|TEA_0,00%"
+        ],
+        "min_allowed_amount": 0,
+        "max_allowed_amount": 250000,
+        "recommended_message": "1"
+      },
+      {
+        "installments": 3,
+        "installment_rate": 10.97,
+        "labels": [
+          "CFT_87,81%|TEA_69,00%"
+        ],
+        "min_allowed_amount": 2,
+        "max_allowed_amount": 250000,
+        "recommended_message": "3"
+      },
+      {
+        "installments": 6,
+        "installment_rate": 19.51,
+        "labels": [
+          "CFT_86,71%|TEA_68,51%",
+          "recommended_interest_installment_with_some_banks"
+        ],
+        "min_allowed_amount": 3,
+        "max_allowed_amount": 250000,
+        "recommended_message": "6"
+      },
+      {
+        "installments": 9,
+        "installment_rate": 31.46,
+        "labels": [
+          "CFT_97,84%|TEA_77,34%"
+        ],
+        "min_allowed_amount": 5,
+        "max_allowed_amount": 250000,
+        "recommended_message": "9"
+      },
+      {
+        "installments": 12,
+        "installment_rate": 42.11,
+        "labels": [
+          "recommended_installment",
+          "CFT_98,26%|TEA_78,00%"
+        ],
+        "min_allowed_amount": 6,
+        "max_allowed_amount": 250000,
+        "recommended_message": "12"
+      }
+    ]
+  }, ...
+]
 ```
