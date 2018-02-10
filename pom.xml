@@ -5,6 +5,21 @@
     <artifactId>peeta</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    
+    <name>Peeta for MercadoPago</name>
+    <description>
+        Artifact integrable to your shopping cart project or payment module
+    </description>
+    <developers>
+        <developer>
+            <email>yogonza524@gmail.com</email>
+            <name>Gonzalo H. Mendoza</name>
+            <roles>
+                <role>Java SSr Developer</role>
+            </roles>
+            <timezone>GMT-3</timezone>
+        </developer>
+    </developers>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -22,18 +37,11 @@
             <artifactId>sdk</artifactId>
             <version>0.3.4</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.codehaus.jettison/jettison -->
         <dependency>
             <groupId>org.codehaus.jettison</groupId>
             <artifactId>jettison</artifactId>
             <version>1.3.7</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
-<!--        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.4</version>
-        </dependency>-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
