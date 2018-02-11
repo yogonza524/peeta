@@ -1,14 +1,14 @@
 # Peeta. What is it?
 Lightweight tool for access to the different features of MercadoPago.
 
-# What is MercadoPago
+# What is MercadoPago?
 It is a payment processing tool created by MercadoLibre Argentina, with regional impact in Latin America. Allowed at https://www.mercadopago.com.ar
 
 # Requirements
 To use Peeeta you need to create an account in Mercadopago and access the keys using the developer tools
 
 # Install dependencies
-Peeta need next dependencies for work:
+Peeta can be added to your project very simply using Maven:
 ```xml
     <dependencies>
         <dependency>
@@ -579,27 +579,27 @@ And the response will be
 
 ```json
 {
-  "id": 139929232,
-  "nickname": "MENDOZAGONZALO75",
-  "registration_date": "2013-06-07T22:10:43.000-04:00",
+  "id": 139386271,
+  "nickname": "GONZALOMENDOZA534",
+  "registration_date": "2010-12-06T21:11:37.000-04:00",
   "first_name": "Gonzalo",
   "last_name": "Mendoza",
   "country_id": "AR",
-  "email": "yogonza524@gmail.com",
+  "email": "yogonza553@gmail.com",
   "identification": {
-    "number": "34093153",
+    "number": "35098476",
     "type": "DNI"
   },
   "address": {
-    "address": "Feliz de Azara 660",
-    "city": "Capital",
+    "address": "Nordelta 784",
+    "city": "Caballito",
     "state": "AR-W",
-    "zip_code": "3400"
+    "zip_code": "5340"
   },
   "phone": {
     "area_code": " ",
     "extension": "",
-    "number": "3794267413",
+    "number": "3624961302",
     "verified": false
   },
   "alternative_phone": {
@@ -614,9 +614,9 @@ And the response will be
     "messages_as_seller",
     "messages_as_buyer"
   ],
-  "points": 1,
+  "points": 13424,
   "site_id": "MLA",
-  "permalink": "http://perfil.mercadolibre.com.ar/MENDOZAGONZALO75",
+  "permalink": "http://perfil.mercadolibre.com.ar/GONZALOMENDOZA112",
   "shipping_modes": [
     "custom",
     "not_specified",
@@ -666,7 +666,7 @@ And the response will be
     "site_status": "active",
     "user_type": "simple_registration"
   },
-  "secure_email": "gmendoz.5g013s@mail.mercadolibre.com",
+  "secure_email": "yoelgonza.7f147s@mail.mercadolibre.com",
   "context": {}
 }
 ```
