@@ -768,7 +768,7 @@ And the response will be:
 ]
 ```
 # Documentation
-Peeta has a mecansimo access to documentation in the same source code.
+Peeta has a mecansim access to documentation in the same source code.
 
 ## Documented classes (Listed at enum DocumentableClass)
 * CheckoutModel
